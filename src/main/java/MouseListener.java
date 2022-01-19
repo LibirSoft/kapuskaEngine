@@ -29,6 +29,9 @@ public class MouseListener {
         get().lastY = get().posY;
         get().posX = posx;
         get().posY = posy;
+
+        // if any of these pressed it means dragging
+        get().isDragging = get().mouseButtonPressed[0] || get().mouseButtonPressed[1] || get().mouseButtonPressed[2];
     }
 
     public static void mouseButtonCallback(long window, int button, int action, int mods) {
@@ -61,4 +64,40 @@ public class MouseListener {
         get().lastY = get().posY;
     }
 
+    public static float getX() {
+        return (float) get().posX;
+    }
+
+    public static float getY() {
+        return (float) get().posY;
+    }
+
+    public static float getDx() {
+        return (float) (get().lastX - get().posX);
+    }
+
+    public static float getDy() {
+        return (float) (get().lastY - get().posY);
+    }
+
+    public static float getScrollX() {
+        return (float) get().scrollX;
+    }
+
+    public boolean isDragging() {
+        return get().isDragging;
+    }
+
+    public static float getScrollY() {
+        return (float) get().scrollY;
+    }
+
+    public boolean getMouseButtonDown(int button) {
+        if (button < get().mouseButtonPressed.length) {
+
+            return get().mouseButtonPressed[button];
+        } else {
+            return false;
+        }
+    }
 }

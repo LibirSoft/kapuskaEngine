@@ -88,6 +88,9 @@ public class Window {
             throw new IllegalStateException("Field to create the GLFW Window");
         }
 
+
+        initMouseListener();
+
         glfwMakeContextCurrent(glfwWindow);
 
         glfwSwapInterval(1);
@@ -96,6 +99,12 @@ public class Window {
 
         GL.createCapabilities();
 
+    }
+
+    private void initMouseListener() {
+        glfwSetCursorPosCallback(glfwWindow,MouseListener::mousePosCallback);
+        glfwSetMouseButtonCallback(glfwWindow,MouseListener::mouseButtonCallback);
+        glfwSetScrollCallback(glfwWindow,MouseListener::mouseScrollCallback);
     }
 
 }
