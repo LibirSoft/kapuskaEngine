@@ -1,6 +1,7 @@
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
 
+import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.NULL;
@@ -37,15 +38,31 @@ public class Window {
 
         init();
         loop();
+
+
+        freeMemoryGlFW();
+
+        terminateGLFW();
+
+    }
+
+    private void terminateGLFW() {
+        glfwTerminate();
+        glfwSetErrorCallback(null).free();
+    }
+
+    private void freeMemoryGlFW() {
+        glfwFreeCallbacks(glfwWindow);
+        glfwDestroyWindow(glfwWindow);
     }
 
     private void loop() {
 
-        while (!glfwWindowShouldClose(glfwWindow)){
+        while (!glfwWindowShouldClose(glfwWindow)) {
             // Event pool
             glfwPollEvents();
 
-            glClearColor(1.0f,0.0f,0.0f,1.0f);
+            glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT);
 
             glfwSwapBuffers(glfwWindow);
@@ -56,18 +73,18 @@ public class Window {
     private void init() {
         GLFWErrorCallback.createPrint(System.err).set();
 
-        if (!glfwInit()){
+        if (!glfwInit()) {
             throw new IllegalStateException("Unable to initalize GLFW");
         }
 
         glfwDefaultWindowHints();
-        glfwWindowHint(GLFW_VISIBLE,GLFW_FALSE);
-        glfwWindowHint(GLFW_RESIZABLE,GLFW_TRUE);
-        glfwWindowHint(GLFW_MAXIMIZED,GLFW_TRUE);
+        glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+        glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
+        glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE);
 
-        glfwWindow = glfwCreateWindow(this.widt,this.height,this.title,NULL,NULL);
+        glfwWindow = glfwCreateWindow(this.widt, this.height, this.title, NULL, NULL);
 
-        if (glfwWindow == NULL){
+        if (glfwWindow == NULL) {
             throw new IllegalStateException("Field to create the GLFW Window");
         }
 
