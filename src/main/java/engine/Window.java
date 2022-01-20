@@ -18,16 +18,12 @@ public class Window {
 
 
     private Window() {
-
         this.widt = 1920;
         this.height = 1080;
         this.title = "KapuskaEngine";
-
-
     }
 
     public static Window get() {
-
         if (Window.window == null) {
             Window.window = new Window();
         }
@@ -41,11 +37,8 @@ public class Window {
         init();
         loop();
 
-
         freeMemoryGlFW();
-
         terminateGLFW();
-
     }
 
     private void terminateGLFW() {
@@ -61,7 +54,6 @@ public class Window {
     private void loop() {
 
         while (!glfwWindowShouldClose(glfwWindow)) {
-            // Event pool
             glfwPollEvents();
 
             glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
@@ -90,9 +82,7 @@ public class Window {
             throw new IllegalStateException("Field to create the GLFW Window");
         }
 
-
         ınputsInit();
-
 
         glfwMakeContextCurrent(glfwWindow);
 
@@ -101,7 +91,6 @@ public class Window {
         glfwShowWindow(glfwWindow);
 
         GL.createCapabilities();
-
     }
 
     private void ınputsInit() {
