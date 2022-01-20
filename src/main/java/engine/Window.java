@@ -1,3 +1,5 @@
+package engine;
+
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
 
@@ -89,7 +91,8 @@ public class Window {
         }
 
 
-        initMouseListener();
+        ınputsInit();
+
 
         glfwMakeContextCurrent(glfwWindow);
 
@@ -101,10 +104,11 @@ public class Window {
 
     }
 
-    private void initMouseListener() {
+    private void ınputsInit() {
         glfwSetCursorPosCallback(glfwWindow,MouseListener::mousePosCallback);
         glfwSetMouseButtonCallback(glfwWindow,MouseListener::mouseButtonCallback);
         glfwSetScrollCallback(glfwWindow,MouseListener::mouseScrollCallback);
+        glfwSetKeyCallback(glfwWindow, KeyListener::keyCallback);
     }
 
 }
