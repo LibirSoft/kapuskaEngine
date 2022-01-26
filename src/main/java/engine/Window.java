@@ -1,5 +1,6 @@
 package engine;
 
+import engine.util.Time;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
 
@@ -52,6 +53,8 @@ public class Window {
     }
 
     private void loop() {
+        float firstTime = Time.getTime();
+        float endTime;
 
         while (!glfwWindowShouldClose(glfwWindow)) {
             glfwPollEvents();
@@ -60,6 +63,10 @@ public class Window {
             glClear(GL_COLOR_BUFFER_BIT);
 
             glfwSwapBuffers(glfwWindow);
+
+            endTime = Time.getTime();
+            float deltaTime = endTime-firstTime;
+            firstTime = endTime;
         }
 
     }
