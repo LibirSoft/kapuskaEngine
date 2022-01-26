@@ -10,7 +10,7 @@ import static org.lwjgl.system.MemoryUtil.NULL;
 
 public class Window {
 
-    int widt, height;
+    int width, height;
     String title;
     public long glfwWindow;
 
@@ -18,7 +18,7 @@ public class Window {
 
 
     private Window() {
-        this.widt = 1920;
+        this.width = 1920;
         this.height = 1080;
         this.title = "KapuskaEngine";
     }
@@ -76,7 +76,7 @@ public class Window {
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
         glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE);
 
-        glfwWindow = glfwCreateWindow(this.widt, this.height, this.title, NULL, NULL);
+        glfwWindow = glfwCreateWindow(this.width, this.height, this.title, NULL, NULL);
 
         if (glfwWindow == NULL) {
             throw new IllegalStateException("Field to create the GLFW Window");
